@@ -2,7 +2,7 @@ const int ultrasound_sensor_trigger_pin = 2;
 const int ultrasound_sensor_echo_pin = 4;
 long lecture_echo; // long[2^31-1;2^31-1]
 long obstacle_distance;
-bool is_obstacle = false // true if there is an obstacle
+bool is_obstacle = false; // true if there is an obstacle
 
 long distance_mesurement(){
   digitalWrite(ultrasound_sensor_trigger_pin, HIGH);
@@ -10,8 +10,15 @@ long distance_mesurement(){
   digitalWrite(ultrasound_sensor_trigger_pin, LOW);
   lecture_echo = pulseIn(ultrasound_sensor_echo_pin,HIGH);
   obstacle_distance = lecture_echo /58;
-  return distance;
+  return obstacle_distance;
 }
+
+void Serialprint(long obstacle_distance){
+  Serial.print("Distance en cm :");
+  Serial.println(obstacle_distance);
+  
+}
+
 
 void setup(){
   pinMode(ultrasound_sensor_trigger_pin, OUTPUT);
@@ -22,7 +29,6 @@ void setup(){
 
 void loop(){
   obstacle_distance = distance_mesurement();
-  Serial.print("Distance en cm :");
-  Serial.println(distance);
+  Serialprint(obstacle_distance);
   delay(1500);
 }
