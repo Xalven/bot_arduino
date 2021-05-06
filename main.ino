@@ -16,7 +16,7 @@ long distance_mesurement(){
 
 void update_buzzer(long obstacle_distance){
   if (obstacle_distance < 10){
-    tone(buzzer_pin, 200);
+    digitalWrite(buzzer_pin,HIGH);
   }
   else{
     digitalWrite(buzzer_pin, LOW);
